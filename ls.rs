@@ -10,5 +10,19 @@ fn main(){
         println!("{cmd}: Need 1 argument");
         std::process::exit(1);
     };
-    
+
+    //println!("{}",args[0]);
+    let dir=match fs::read_dir(&args[0]){
+      Ok(r)=>r,
+      Err(e)=>{
+        println!("{cmd}: {e}");
+        std::process::exit(2);
+      }
+    };
+
+    for file in dir {
+      //dbg!(file.unwrap().path().display());
+      println!("{}", file.unwrap().path().display());
+    }
+
 }
